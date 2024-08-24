@@ -1,4 +1,4 @@
-##i-Park, Parking Garage system for Malls [Node.JS ]
+#i-Park, Parking Garage system for Malls [Node.JS ]
 
 •APIs for Garages, Areas, Slots
 •Reservation Cash or Card
