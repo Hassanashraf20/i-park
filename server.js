@@ -3,7 +3,7 @@ const express = require ("express")
 const dotenv = require("dotenv")
 const morgan = require("morgan")
 const cors = require('cors')
-
+const rateLimit = require('express-rate-limit')
 
 dotenv.config({path: "config.env"})
 
@@ -32,6 +32,16 @@ dbconnection()
 //Midlleware
 app.use(express.json())   //#Security > {limit:'25kb'} > Set request size limits
 
+const apiLimiter = rateLimit({
+	windowMs: 30 * 60 * 1000, // 15 minutes
+	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	// standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	// legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+	// // store: ... , // Use an external store for more precise rate limiting
+})
+
+// Apply the rate limiting middleware to API calls only
+app.use('/api', apiLimiter)
 
 
 
