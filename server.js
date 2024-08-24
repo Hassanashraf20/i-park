@@ -7,6 +7,7 @@ const cors = require('cors')
 
 dotenv.config({path: "config.env"})
 
+
 const apiError = require(`./utils/apiErorr`)
 const dbconnection = require("./config/database")
 const globaleError = require(`./middlewares/errorMidlleware`)
