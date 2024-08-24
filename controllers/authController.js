@@ -28,19 +28,6 @@ exports.signup=asyncHandler(async(req,res,next)=>{
     //2)create token
     const token = createToken(user._id)
 
-    //cookie Options
-    const cookieOptions = {
-      expires: new Date(Date.now + process.env.JWT_COOKIE_EXPIRE_TIME * 24 * 60 * 60 * 1000),
-      httpOnly:true,
-    }
-    if(process.env.NODE_ENV === 'production'){
-      cookieOptions.secure = true 
-    }
-    //send cookie
-    res.cookie('jwt', token ,cookieOptions )
-
-    user.password = undefined
-    
     res.status(201).json({data:user,token})
 
 })
@@ -58,19 +45,6 @@ exports.login=asyncHandler(async(req,res,next)=>{
 
     //2)create token
     const token= createToken(user._id)
-
-    //cookie Options
-    const cookieOptions = {
-      expires: new Date(Date.now + process.env.JWT_COOKIE_EXPIRE_TIME * 24 * 60 * 60 * 1000),
-      httpOnly:true,
-    }
-    if(process.env.NODE_ENV === 'production'){
-      cookieOptions.secure = true 
-    }
-    //send cookie
-    res.cookie('jwt', token ,cookieOptions )
-
-    user.password = undefined
 
     res.status(200).json({data:user,token})
 })
